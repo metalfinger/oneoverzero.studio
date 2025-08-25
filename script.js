@@ -167,9 +167,9 @@ document.addEventListener("DOMContentLoaded", () => {
                   vec2 st = gl_FragCoord.xy/u_resolution.xy;
                   float mouse_dist = distance(st, u_mouse);
                   float noise = random(st * u_time);
-                  vec3 color = vec3(noise) * vec3(0.15, 0.12, 0.25);
+                  vec3 color = vec3(noise) * vec3(0.8, 0.7, 1.0);
                   float glow = 1.0 - smoothstep(0.0, 0.2, mouse_dist);
-                  gl_FragColor = vec4(color, (noise * 0.08) + (glow * 0.05));
+                  gl_FragColor = vec4(color, (noise * 0.15) + (glow * 0.1));
               }`;
 
 			const createShader = (gl, type, source) => {
@@ -664,3 +664,27 @@ document.addEventListener("DOMContentLoaded", () => {
 		};
 	}
 });
+
+// Remove any accidental canvases inside CTA elements/buttons (preserve core canvases)
+(function removeCTAOverlays() {
+	const preserveIds = new Set([
+		"aether",
+		"glitch-canvas-1",
+		"glitch-canvas-2",
+		"philosophy-canvas",
+		"arena-visual-canvas",
+		"glitch-canvas-1",
+		"glitch-canvas-2",
+	]);
+
+	const selectors = [".cta-nav", ".cta-big", "button", "a"];
+	selectors.forEach((sel) => {
+		document.querySelectorAll(sel).forEach((el) => {
+			el.querySelectorAll("canvas").forEach((c) => {
+				if (!c.id || !preserveIds.has(c.id)) {
+					c.remove();
+				}
+			});
+		});
+	});
+})();

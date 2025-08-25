@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>oneoverzero studio — stories written in code</title>
+  <meta name="description" content="oneoverzero (1/0) — an experimental studio crafting humane, immersive stories with AI, generative art, and interactive technology." />
+  <meta name="theme-color" content="#0b0b11" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Social / Open Graph -->
+  <meta property="og:title" content="oneoverzero studio — stories written in code" />
+  <meta property="og:description" content="Experimental story studio blending AI, generative art, and immersive media into strangely human experiences." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://oneoverzero.studio/" />
+  <meta property="og:image" content="https://placehold.co/1200x630/0b0b11/e7e7ec?text=1/0" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts: Satoshi + JetBrains Mono -->
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0b11;
+      --fg: #e7e7ec;
+      --muted: #9aa0a6;
+      --accent1: #9f7aea;
+      --accent2: #22d3ee;
+      --accent3: #f472b6;
+      --glass: rgba(255,255,255,.04);
+      --glow: 0 0 32px rgba(159,122,234,.28), 0 0 64px rgba(34,211,238,.18);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Satoshi', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--fg); text-decoration: none; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Global Layout */
+    .container { width: min(1200px, 92vw); margin-inline: auto; }
+    section { padding: 128px 0; }
+    .eyebrow { 
+      letter-spacing: .2em; 
+      text-transform: uppercase; 
+      color: var(--muted); 
+      font-size: .8rem;
+      margin-bottom: 12px;
+    }
+    h1, h2 { line-height: 1.1; margin: 0 0 16px; font-weight: 900; }
+    h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); }
+    p { color: #c9c9d3; font-size: clamp(1rem, 1.2vw, 1.15rem); font-weight: 400; max-width: 65ch; }
+    
+    /* Skip link for a11y */
+    .skip{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip:focus{left:16px; top:16px; width:auto; height:auto; background:#111; color:#fff; padding:8px 10px; border-radius:8px; z-index: 100;}
+
+    /* Navigation */
+    .nav {
+      position: fixed; inset: 16px 16px auto 16px; z-index: 50; display: flex; align-items: center; gap: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      padding: 10px 16px; border-radius: 14px; box-shadow: var(--glow);
+    }
+    .nav .brand { display: flex; gap: 10px; align-items: center; font-weight: 700; }
+    .logo {
+      width: 28px; height: 28px; border-radius: 8px; position: relative; overflow: hidden;
+      background: conic-gradient(from 220deg, var(--accent1), var(--accent2), var(--accent3), var(--accent1));
+      filter: drop-shadow(0 0 10px rgba(159,122,234,.35)); animation: spin 12s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(1turn); } }
+    .nav a.link { opacity: .9; font-weight: 700; font-size: .92rem; transition: color 0.2s; }
+    .nav a.link:hover { color: var(--accent2); }
+    .spacer { flex: 1; }
+    .cta-nav {
+      padding: 10px 16px; border-radius: 12px; font-weight: 700; font-size: .92rem;
+      background: radial-gradient(120% 120% at 80% 0%, rgba(34,211,238,.25), rgba(159,122,234,.18));
+      border: 1px solid rgba(255,255,255,.1); transition: transform .2s ease, background .4s ease;
+    }
+    .cta-nav:hover { transform: translateY(-2px); background: radial-gradient(140% 140% at 70% -10%, rgba(34,211,238,.45), rgba(159,122,234,.28)); }
+
+    /* HERO Section */
+    .hero { position: relative; min-height: 100dvh; display: grid; place-items: center; overflow: hidden; }
+    canvas#aether { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .hero-inner { z-index: 1; text-align: center; padding: 12vh 0 10vh; }
+    .glitch { display: inline-block; position: relative; }
+    .glitch .ghost { position: absolute; inset: 0; color: var(--accent2); clip-path: inset(0 0 50% 0); mix-blend-mode: screen; opacity: .35; filter: blur(.6px); }
+    .glitch .ghost:nth-child(3) { color: var(--accent3); clip-path: inset(48% 0 0 0); }
+    .sub { max-width: 700px; margin: 24px auto 32px; opacity: .92; font-size: clamp(1.1rem, 2vw, 1.3rem); line-height: 1.6; }
+    .pillbar { display: inline-flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .pill { border: 1px solid rgba(255,255,255,.12); background: var(--glass); padding: 8px 14px; border-radius: 999px; font-size: .9rem; color: #d8d8e0; }
+    .scroll-indicator { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); opacity: .75; font-size: .85rem; }
+    .scroll-indicator .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--fg); animation: pulse 1.8s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: .2; transform: translateY(0); } 50% { opacity: 1; transform: translateY(6px); } }
+
+    /* Reveal Animation */
+    .reveal { opacity: 0; transform: translateY(20px); filter: blur(8px); transition: opacity 1s ease, transform 1s ease, filter 1.2s ease; }
+    .reveal.in { opacity: 1; transform: none; filter: none; }
+
+    /* Panel */
+    .panel { position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0)); border: 1px solid rgba(255,255,255,.07); border-radius: 24px; padding: 32px; box-shadow: var(--glow); }
+    .panel-content { position: relative; z-index: 2; }
+
+    /* Grid */
+    .grid { display: grid; gap: 24px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; } }
+
+    /* Cards */
+    .card {
+      position: relative; overflow: hidden; border-radius: 20px; padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08); transform-style: preserve-3d;
+      transition: transform .3s ease, border-color .3s; will-change: transform;
+    }
+    .card:hover { border-color: rgba(255,255,255,.2); }
+    .card::after { content: ""; position: absolute; inset: -2px; background: radial-gradient(150px 150px at var(--mx, 50%) var(--my, 50%), rgba(159,122,234,.2), transparent 70%); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .card:hover::after { opacity: 1; }
+    .card h3 { margin: 6px 0 10px; font-size: 1.3rem; font-weight: 700; }
+    .visual-placeholder {
+      background-color: rgba(0,0,0,0.2); border-radius: 12px; height: 150px; margin-bottom: 18px;
+      display: grid; place-items: center; color: var(--muted); font-size: 0.8rem;
+      border: 1px dashed rgba(255,255,255,0.1);
+    }
+    
+    /* Arena Cards */
+    .arena {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .arena .icon {
+      width: 48px; height: 48px; margin-bottom: 16px;
+    }
+    .arena .icon svg {
+      stroke: var(--accent2); stroke-width: 1.5; fill: none;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+
+    /* Contact */
+    .cta-block { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+    .cta-big {
+      display: inline-flex; gap: 10px; align-items: center; padding: 16px 24px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12); background: linear-gradient(180deg, rgba(159,122,234,.18), rgba(34,211,238,.16));
+      font-weight: 800; font-size: 1.1rem; transition: all 0.3s ease;
+    }
+    .cta-big:hover { filter: brightness(1.1); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    form[name="contact"] { margin-top: 24px; width: 100%; max-width: 640px; display: grid; gap: 12px; }
+    form[name="contact"] .form-row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    form[name="contact"] input, form[name="contact"] textarea { padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: var(--fg); font-family: 'Satoshi', sans-serif; font-size: 1rem; }
+    form[name="contact"] button { margin-top: 12px; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .logo, .scroll-indicator .dot { animation: none; }
+      .card, .cta-nav, .cta-big { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#home" class="skip mono">Skip to content</a>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="primary">
+    <div class="brand"><span class="logo" aria-hidden="true"></span><span class="mono">oneoverzero <span style="color:var(--muted)">/ 1/0</span></span></div>
+    <div class="spacer"></div>
+    <a class="link" href="#practice">Practice</a>
+    <a class="link" href="#philosophy">Philosophy</a>
+    <a class="link" href="#arenas">Arenas</a>
+    <a class="cta-nav" href="#contact">Collaborate</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <canvas id="aether" aria-hidden="true"></canvas>
+    <div class="hero-inner container">
+      <div class="eyebrow mono">Creative Technology Studio</div>
+      <h1 class="glitch">
+        <span class="text">Stories written in code. Emotions carved from pixels.</span>
+        <span class="ghost" aria-hidden="true">Stories written in code. Emotions carved from pixels.</span>
+        <span class="ghost" aria-hidden="true">Stories written in code. Emotions carved from pixels.</span>
+      </h1>
+      <p class="sub">We shape emergent technology into story-driven experiences that are intuitive, evocative, and strangely human.</p>
+      <div class="pillbar">
+        <span class="pill mono">AI & Voice Synthesis</span>
+        <span class="pill mono">Generative Art & Motion</span>
+        <span class="pill mono">Immersive Installations</span>
+        <span class="pill mono">Interactive Web</span>
+      </div>
+    </div>
+    <a href="#who" class="scroll-indicator mono" aria-label="Scroll down">
+      <span>scroll</span>
+      <span class="dot" style="margin-left:8px"></span>
+    </a>
+  </header>
+
+  <!-- WHO / MYTH -->
+  <section id="who">
+    <div class="container">
+      <div class="panel reveal" style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px; align-items: center; @media (max-width: 768px) { grid-template-columns: 1fr; }">
+        <div class="visual-placeholder" style="height: 100%; min-height: 250px; margin: 0;">
+            <span class="mono">Visual Concept Here</span>
+        </div>
+        <div>
+            <div class="eyebrow mono">What is 1/0?</div>
+            <h2>A design studio where code, art, and humanity converge.</h2>
+            <p>We craft evocative experiences with new technologies. Our process is about hiding the machine to reveal the feeling, leaving only a sense of wonder.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="practice">
+    <div class="container">
+      <div class="eyebrow mono reveal">Our Practice</div>
+      <h2 class="reveal">Core Capabilities</h2>
+      <div class="grid cols-3" style="margin-top:24px">
+        <article class="card reveal" data-tilt>
+          <h3>AI & Voice Synthesis</h3>
+          <p>Crafting synthetic voices, virtual characters, and AI-driven narrators for artists and brands.</p>
+        </article>
+        <article class="card reveal" data-tilt>
+          <h3>Immersive Environments</h3>
+          <p>Designing reactive stages, projection-mapped architecture, and sensory installations that respond to human presence.</p>
+        </article>
+        <article class="card reveal" data-tilt>
+          <h3>Interactive Web Worlds</h3>
+          <p>Building story-driven microsites, generative archives, and immersive digital platforms with WebGL.</p>
+        </article>
+        <article class="card reveal" data-tilt>
+          <h3>Generative Art & Design</h3>
+          <p>Using algorithms as a creative partner to produce data-driven visuals and infinitely variable art.</p>
+        </article>
+        <article class="card reveal" data-tilt>
+          <h3>Experiential Design</h3>
+          <p>Creating memorable brand activations, cultural interventions, and festival installations that invite participation.</p>
+        </article>
+        <article class="card reveal" data-tilt>
+          <h3>Hybrid Systems</h3>
+          <p>Engineering complex pipelines connecting Unreal, TouchDesigner, AI models, and physical sensors.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy">
+    <div class="container">
+      <div class="panel reveal" style="text-align: center;">
+          <canvas id="philosophy-canvas" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; border-radius: 24px;"></canvas>
+          <div class="panel-content">
+              <div class="eyebrow mono">Our Philosophy</div>
+              <h2>Technology should feel human, not mechanical.</h2>
+              <p style="margin-inline: auto;">We build with code to make people pause, feel, and remember. The complexity disappears; the story remains.</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARENAS (INDUSTRIES) - REVERTED TO GRID VIEW -->
+  <section id="arenas">
+    <div class="container">
+      <div class="eyebrow mono reveal">Arenas</div>
+      <h2 class="reveal">Where Our Stories Live</h2>
+      <div class="grid cols-2" style="margin-top:24px">
+        <article class="arena card reveal" data-tilt>
+          <div class="visual-placeholder"><span class="mono">Visual for Music</span></div>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
+          <h3>Music & Stages</h3>
+          <p>Concerts, tours, audio-reactive scenography. Music becomes light.</p>
+        </article>
+        <article class="arena card reveal" data-tilt>
+          <div class="visual-placeholder"><span class="mono">Visual for Film</span></div>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
+          <h3>Film & Screens</h3>
+          <p>Virtual production, previz, promotional art. Cinema meets machine vision.</p>
+        </article>
+        <article class="arena card reveal" data-tilt>
+          <div class="visual-placeholder"><span class="mono">Visual for Brands</span></div>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+          <h3>Brands & Marketing</h3>
+          <p>Pop-ups, AI avatars, interactive launchpads. Campaigns as experiences.</p>
+        </article>
+        <article class="arena card reveal" data-tilt>
+          <div class="visual-placeholder"><span class="mono">Visual for Culture</span></div>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+          <h3>Culture & Festivals</h3>
+          <p>Museums, festivals, participatory installations. Creating living archives.</p>
+        </article>
+        <article class="arena card reveal" data-tilt>
+          <div class="visual-placeholder"><span class="mono">Visual for Tech</span></div>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+          <h3>Tech & Expos</h3>
+          <p>Corporate storytelling, keynote scenography, and immersive innovation showcases.</p>
+        </article>
+        <article class="arena card reveal" data-tilt>
+          <div class="visual-placeholder"><span class="mono">Visual for Luxury</span></div>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></div>
+          <h3>Luxury & Retail</h3>
+          <p>Generative walls, XR try-ons, and experiential retail. Art as ambience.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer id="contact" style="padding: 128px 0;">
+    <div class="container cta-block reveal">
+      <div class="eyebrow mono">Collaboration</div>
+      <h2>Have a story that needs to be told?</h2>
+      <p style="margin-inline: auto;">We partner with the curious, the bold, and the ones who believe in the power of wonder.</p>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <p style="display:none;"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+        <div class="form-row">
+          <input required name="name" placeholder="Your name" type="text" />
+          <input required type="email" name="email" placeholder="Your email" />
+        </div>
+        <textarea required name="message" placeholder="Tell us about your story…" rows="4"></textarea>
+        <button class="cta-big" type="submit"><span class="mono">→ Send Message</span></button>
+      </form>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ——————————————————————————————————————————————
+      //  AETHER CANVAS — mystical flow-field particles
+      // ——————————————————————————————————————————————
+      const heroCanvas = document.getElementById('aether');
+      if (heroCanvas) {
+        const heroCtx = heroCanvas.getContext('2d');
+        let w, h, dpr;
+        const particles = [];
+        const MAX = 1200;
+        let t = 0;
+        let raf;
+
+        const pr = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        function resizeHeroCanvas() {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          w = heroCanvas.width = Math.floor(innerWidth * dpr);
+          h = heroCanvas.height = Math.floor(innerHeight * dpr);
+          heroCanvas.style.width = innerWidth + 'px';
+          heroCanvas.style.height = innerHeight + 'px';
+        }
+
+        function rand(a, b) { return a + Math.random() * (b - a); }
+
+        function angle(x, y, tt) {
+          const s = Math.sin, c = Math.cos;
+          const n = s(x * 0.002 + tt * 0.15) * c(y * 0.002 - tt * 0.11) + s((x + y) * 0.0008 + tt * 0.05);
+          return n * Math.PI * 2;
+        }
+
+        class Particle {
+          constructor() { this.reset(true); }
+          reset(randomY = false) {
+            this.x = rand(0, w);
+            this.y = randomY ? rand(0, h) : rand(h * .2, h * .8);
+            this.spd = rand(0.2, 1.6) * (w / 1600);
+            this.size = rand(0.4, 1.2) * (w / 1600);
+            this.hue = 260 + rand(-30, 30);
+            this.life = rand(300, 900);
+          }
+          step() {
+            const a = angle(this.x, this.y, t);
+            this.x += Math.cos(a) * this.spd;
+            this.y += Math.sin(a) * this.spd;
+            this.life--;
+            if (this.x < 0) this.x = w - 1; if (this.x > w) this.x = 1;
+            if (this.y < 0) this.y = h - 1; if (this.y > h) this.y = 1;
+            if (this.life <= 0) this.reset();
+            heroCtx.beginPath();
+            heroCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            heroCtx.fillStyle = `hsla(${this.hue}, 80%, 70%, .22)`;
+            heroCtx.fill();
+          }
+        }
+
+        function initHeroCanvas() {
+          particles.length = 0;
+          const count = Math.min(Math.floor((w * h) / 1500), MAX);
+          for (let i = 0; i < count; i++) particles.push(new Particle());
+          heroCtx.globalCompositeOperation = 'lighter';
+        }
+
+        function fadeHeroCanvas() {
+          heroCtx.globalCompositeOperation = 'source-over';
+          heroCtx.fillStyle = 'rgba(11,11,17,.08)';
+          heroCtx.fillRect(0, 0, w, h);
+          heroCtx.globalCompositeOperation = 'lighter';
+        }
+
+        function loop() {
+          fadeHeroCanvas();
+          t += 0.6;
+          for (const p of particles) p.step();
+          raf = requestAnimationFrame(loop);
+        }
+
+        function startAether() { if (!pr.matches) { cancelAnimationFrame(raf); loop(); } }
+        function stopAether() { cancelAnimationFrame(raf); }
+
+        window.addEventListener('resize', () => { resizeHeroCanvas(); initHeroCanvas(); });
+        resizeHeroCanvas(); initHeroCanvas(); startAether();
+        pr.addEventListener?.('change', e => e.matches ? stopAether() : startAether());
+      }
+
+      // ——————————————————————————————————————————————
+      //  PHILOSOPHY CANVAS - Interactive Noise Shader
+      // ——————————————————————————————————————————————
+      const philosophyCanvas = document.getElementById('philosophy-canvas');
+      if (philosophyCanvas) {
+        try {
+          const gl = philosophyCanvas.getContext('webgl', { antialias: true });
+          if (!gl) throw new Error("WebGL not supported");
+          
+          let philosophyRAF;
+          const vertexShaderSource = `attribute vec2 a_position; void main() { gl_Position = vec4(a_position, 0.0, 1.0); }`;
+          const fragmentShaderSource = `
+              precision mediump float;
+              uniform vec2 u_resolution; uniform float u_time; uniform vec2 u_mouse;
+              float random(vec2 st) { return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123); }
+              void main() {
+                  vec2 st = gl_FragCoord.xy/u_resolution.xy;
+                  float mouse_dist = distance(st, u_mouse);
+                  float noise = random(st * u_time);
+                  vec3 color = vec3(noise) * vec3(0.8, 0.7, 1.0);
+                  float glow = 1.0 - smoothstep(0.0, 0.2, mouse_dist);
+                  gl_FragColor = vec4(color, (noise * 0.15) + (glow * 0.1));
+              }`;
+
+          const createShader = (gl, type, source) => {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source); gl.compileShader(shader); return shader;
+          };
+
+          const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+          const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+          const program = gl.createProgram();
+          gl.attachShader(program, vertexShader); gl.attachShader(program, fragmentShader);
+          gl.linkProgram(program); gl.useProgram(program);
+
+          const positionBuffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+          const positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+          gl.enableVertexAttribArray(positionAttributeLocation);
+          gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+          const resolutionUniformLocation = gl.getUniformLocation(program, "u_resolution");
+          const timeUniformLocation = gl.getUniformLocation(program, "u_time");
+          const mouseUniformLocation = gl.getUniformLocation(program, "u_mouse");
+          let mousePos = { x: 0.5, y: 0.5 };
+
+          const renderPhilosophy = (time) => {
+            time *= 0.001;
+            philosophyCanvas.width = philosophyCanvas.clientWidth;
+            philosophyCanvas.height = philosophyCanvas.clientHeight;
+            gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+            gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+            gl.uniform1f(timeUniformLocation, time);
+            gl.uniform2f(mouseUniformLocation, mousePos.x, 1.0 - mousePos.y);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            philosophyRAF = requestAnimationFrame(renderPhilosophy);
+          };
+
+          const philosophyPanel = document.getElementById('philosophy');
+          const philosophyObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              philosophyRAF = requestAnimationFrame(renderPhilosophy);
+            } else {
+              cancelAnimationFrame(philosophyRAF);
+            }
+          });
+          philosophyObserver.observe(philosophyPanel);
+          
+          philosophyPanel.addEventListener('mousemove', e => {
+            const rect = philosophyCanvas.getBoundingClientRect();
+            mousePos.x = (e.clientX - rect.left) / rect.width;
+            mousePos.y = (e.clientY - rect.top) / rect.height;
+          });
+        } catch (error) {
+          console.error("WebGL shader for philosophy section failed:", error);
+          if (philosophyCanvas) philosophyCanvas.style.display = 'none';
+        }
+      }
+
+      // ——————————————————————————————————————————————
+      //  REVEAL ON SCROLL
+      // ——————————————————————————————————————————————
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      // ——————————————————————————————————————————————
+      //  CARD TILT (3D hover)
+      // ——————————————————————————————————————————————
+      const cards = document.querySelectorAll('[data-tilt]');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const mx = (e.clientX - r.left) / r.width;
+          const my = (e.clientY - r.top) / r.height;
+          const rx = (my - .5) * -8;
+          const ry = (mx - .5) * 12;
+          card.style.setProperty('--mx', `${mx * 100}%`);
+          card.style.setProperty('--my', `${my * 100}%`);
+          card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+      });
+
+      // ——————————————————————————————————————————————
+      //  GLITCH ANIMATION SCRIPT
+      // ——————————————————————————————————————————————
+      const glitchEl = document.querySelector('.glitch .text');
+      if (glitchEl) {
+        const originalText = glitchEl.textContent;
+        const alphabet = "█░▒▓/\\|<>_=-+*#0123456789";
+        let frame = 0;
+        const totalFrames = 40;
+        const interval = setInterval(() => {
+            frame++;
+            const progress = frame / totalFrames;
+            glitchEl.textContent = originalText.split('').map((char, i) => {
+                if (char === ' ' || char === '\n') return char;
+                return Math.random() < progress ? originalText[i] : alphabet[Math.floor(Math.random() * alphabet.length)];
+            }).join('');
+            if (frame >= totalFrames) {
+                clearInterval(interval);
+                glitchEl.textContent = originalText;
+            }
+        }, 40);
+      }
+    });
+  </script>
+</body>
+</ht
