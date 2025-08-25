@@ -152,6 +152,7 @@ p {
 	font-size: clamp(1rem, 1.2vw, 1.35rem);
 	font-weight: 400;
 	max-width: 65ch;
+	margin: 0;
 }
 
 /* Add subtle character spacing for paragraph and body text (excluding monospace/eyebrow styles) */
@@ -274,7 +275,7 @@ section p {
 }
 .nav a.link {
 	opacity: 0.9;
-	font-weight: 700;
+	font-weight: 500;
 	font-size: 0.92rem;
 	transition: color 0.2s;
 }
@@ -287,7 +288,7 @@ section p {
 .cta-nav {
 	padding: 0.625rem 1rem;
 	border-radius: 0.75rem;
-	font-weight: 700;
+	font-weight: 500;
 	font-size: 0.92rem;
 	/* animated moving gradient */
 	background: linear-gradient(
@@ -546,9 +547,9 @@ canvas#aether {
 }
 .sub {
 	max-width: 43.75rem;
-	margin: 1.5rem auto 2rem;
+	margin: 1rem auto;
 	opacity: 0;
-	font-size: clamp(1.1rem, 2vw, 1.3rem);
+	font-size: clamp(1.1rem, 2vw, 1.5rem);
 	line-height: 1.6;
 }
 
@@ -1088,10 +1089,8 @@ canvas#aether {
 		display: none;
 	}
 
-	/* hide the non-contact links (Services, Philosophy, Industries) */
-	.nav a.link[href="#practice"],
-	.nav a.link[href="#philosophy"],
-	.nav a.link[href="#arenas"] {
+	/* hide non-contact nav links on mobile (keeps only the CTA visible) */
+	.nav a.link {
 		display: none;
 	}
 
@@ -1110,6 +1109,13 @@ canvas#aether {
 	/* ensure CTA remains prominent but fits */
 	.cta-nav {
 		white-space: nowrap;
+	}
+}
+
+/* Hide decorative pillbar in hero on small screens to reduce clutter */
+@media (max-width: 640px) {
+	.pillbar {
+		display: none;
 	}
 }
 
@@ -1177,6 +1183,41 @@ canvas#aether {
 	font-weight: 700;
 }
 
+/* Service card icons */
+.service-icon {
+	/* width: 3.5rem;
+	height: 3.5rem; */
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	/* justify-content: center; */
+	/* margin-right: 1rem;
+	border-radius: 0.75rem;
+	background: rgba(255, 255, 255, 0.02);
+	border: 0.0625rem solid rgba(255, 255, 255, 0.04); */
+}
+.service-icon img {
+	width: 5rem;
+	height: 5rem;
+	object-fit: contain;
+	display: block;
+}
+
+/* Layout tweak: place icon and content inline on larger cards */
+.arena.card .service-icon,
+.card .service-icon {
+	margin-bottom: 0.25rem;
+}
+
+@media (min-width: 641px) {
+	.card {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+}
+
 /* Arenas (Industries) Section */
 .arena.card {
 	display: flex;
@@ -1202,6 +1243,14 @@ canvas#aether {
 	border: 0.0625rem solid rgba(159, 122, 234, 0.2);
 }
 
+/* Industry images inside .icon */
+.arena .icon img {
+	width: 2rem;
+	height: 2rem;
+	object-fit: contain;
+	display: block;
+}
+
 .arena .icon svg {
 	width: 1.5rem;
 	height: 1.5rem;
@@ -1224,7 +1273,7 @@ canvas#aether {
 		flex-direction: column;
 		gap: 1rem;
 		padding: 1.5rem;
-		text-align: center;
+		/* text-align: center; */
 	}
 
 	.arena .icon {
