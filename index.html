@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>oneoverzero studio — stories written in code</title>
+		<title>1/0 studio — stories written in code</title>
 		<meta
 			name="description"
 			content="oneoverzero (1/0) — an experimental studio crafting humane, immersive stories with AI, generative art, and interactive technology."
@@ -24,9 +24,42 @@
 		<meta property="og:url" content="https://oneoverzero.studio/" />
 		<meta
 			property="og:image"
-			content="https://placehold.co/1200x630/0b0b11/e7e7ec?text=1/0"
+			content="https://oneoverzero.studio/assets/logo.svg"
 		/>
+		<meta
+			property="og:image:secure_url"
+			content="https://oneoverzero.studio/assets/logo.svg"
+		/>
+		<meta property="og:image:type" content="image/svg+xml" />
+		<meta property="og:site_name" content="oneoverzero studio" />
+		<meta property="og:locale" content="en_US" />
 		<meta name="twitter:card" content="summary_large_image" />
+
+		<!-- Favicon: use SVG logo for modern browsers, keep conventional rel for compatibility -->
+		<link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+		<link rel="alternate icon" href="/assets/logo.svg" />
+		<link rel="apple-touch-icon" href="/assets/logo.svg" />
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href="https://oneoverzero.studio/" />
+
+		<!-- Basic SEO -->
+		<meta name="author" content="Hiren — oneoverzero studio" />
+		<meta
+			name="keywords"
+			content="creative technology, generative art, immersive installations, interactive web, AI, voice synthesis, experiential design"
+		/>
+
+		<!-- Structured data (Organization) -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "oneoverzero studio",
+				"url": "https://oneoverzero.studio/",
+				"logo": "https://oneoverzero.studio/assets/logo.svg"
+			}
+		</script>
 
 		<!-- Fonts: Satoshi + JetBrains Mono -->
 		<link
@@ -38,40 +71,46 @@
 			rel="stylesheet"
 		/>
 
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="styleref.css" />
 	</head>
 	<body>
 		<a href="#home" class="skip mono">Skip to content</a>
 
-		<!-- Navigation -->
-		<nav class="nav" aria-label="primary">
+		<!-- NAV -->
+		<nav class="nav nav-hidden" aria-label="primary">
 			<div class="brand">
 				<div class="logo">
-					<img src="@assets/logo" alt="oneoverzero logo" />
+					<img src="/assets/logo.svg" alt="oneoverzero logo" />
 				</div>
-				<span class="mono"
-					>oneoverzero <span style="color: var(--muted)">/ 1/0</span></span
-				>
+				<div class="brand-text">
+					<img src="/assets/logo_text.svg" alt="brand text" />
+				</div>
 			</div>
 			<div class="spacer"></div>
-			<a class="link" href="#practice">Practice</a>
+			<a class="link" href="#practice">Services</a>
 			<a class="link" href="#philosophy">Philosophy</a>
-			<a class="link" href="#arenas">Arenas</a>
-			<a class="cta-nav" href="#contact">Collaborate</a>
+			<a class="link" href="#arenas">Industries</a>
+			<a class="cta-nav" href="#contact">Contact</a>
 		</nav>
 
-		<!-- HERO Section -->
+		<!-- HERO -->
 		<header class="hero" id="home">
 			<canvas id="aether" aria-hidden="true"></canvas>
-			<div class="grain" aria-hidden="true"></div>
-			<div class="halo" aria-hidden="true"></div>
-
 			<div class="hero-inner container">
-				<div class="eyebrow mono">Creative Technology Studio</div>
-				<h1
-					class="glitch"
-					data-text="Stories written in code. Emotions carved from pixels."
-				>
+				<div class="eyebrow mono eyebrow-hidden">
+					Creative Technology Studio
+				</div>
+				<h1 class="glitch">
+					<canvas
+						id="glitch-canvas-1"
+						class="glitch-bg"
+						aria-hidden="true"
+					></canvas>
+					<canvas
+						id="glitch-canvas-2"
+						class="glitch-bg"
+						aria-hidden="true"
+					></canvas>
 					<span class="text"
 						>Stories written in code. Emotions carved from pixels.</span
 					>
@@ -82,433 +121,150 @@
 						>Stories written in code. Emotions carved from pixels.</span
 					>
 				</h1>
-				<p class="sub">
+				<p class="sub sub-hidden">
 					We shape emergent technology into story-driven experiences that are
 					intuitive, evocative, and strangely human.
 				</p>
-				<div class="pillbar">
+				<div class="pillbar pillbar-hidden">
 					<span class="pill mono">Generative Art & Motion</span>
 					<span class="pill mono">Immersive Installations</span>
 					<span class="pill mono">Interactive Web</span>
 					<span class="pill mono">AI & Voice Synthesis</span>
 				</div>
 			</div>
-
-			<a href="#who" class="scroll-indicator mono" aria-label="Scroll down">
-				<span>scroll</span>
-				<span class="dot" style="margin-left: 8px"></span>
+			<a
+				href="#who"
+				class="scroll-indicator mono scroll-hidden"
+				aria-label="Scroll down"
+			>
+				<span class="scroll-text">scroll</span>
+				<div class="scroll-arrow">
+					<div class="arrow-line"></div>
+					<div class="arrow-head"></div>
+				</div>
 			</a>
 		</header>
 
-		<!-- MANIFESTO Section with Interactive Background -->
-		<section id="manifesto">
+		<!-- WHO / MYTH -->
+		<section id="who">
+			<div class="section-floating-elements">
+				<div class="float-element" style="--delay: 0s"></div>
+				<div class="float-element" style="--delay: 1s"></div>
+				<div class="float-element" style="--delay: 2s"></div>
+				<div class="float-element" style="--delay: 3s"></div>
+				<div class="float-element" style="--delay: 4s"></div>
+				<div class="float-element" style="--delay: 5s"></div>
+				<div class="float-element" style="--delay: 6s"></div>
+				<div class="float-element" style="--delay: 7s"></div>
+				<div class="float-element" style="--delay: 8s"></div>
+				<div class="float-element" style="--delay: 9s"></div>
+				<div class="float-element" style="--delay: 10s"></div>
+				<div class="float-element" style="--delay: 11s"></div>
+			</div>
 			<div class="container">
-				<div class="panel reveal">
-					<canvas
-						id="wave-canvas"
-						style="
-							position: absolute;
-							inset: 0;
-							width: 100%;
-							height: 100%;
-							opacity: 0.2;
-						"
-					></canvas>
-					<div style="position: relative; z-index: 2">
+				<div class="who-content reveal">
+					<div class="who-visual">
+						<div class="visual-logo">
+							<div class="logo-glow"></div>
+							<img src="/assets/logo.svg" alt="oneoverzero logo" />
+						</div>
+					</div>
+					<div class="who-text">
 						<div class="eyebrow mono">What is 1/0?</div>
 						<h2>A design studio where code, art, and humanity converge.</h2>
 						<p>
 							We craft evocative experiences with new technologies. Our process
 							is about hiding the machine to reveal the feeling, leaving only a
-							sense of wonder. We're not a production house. We're not just
-							developers. We're illusionists of the digital kind — building
-							experiences that blur the line between technology and magic.
+							sense of wonder.
 						</p>
-						<!-- <div class="audio-viz">
-							<div class="audio-bar"></div>
-							<div class="audio-bar"></div>
-							<div class="audio-bar"></div>
-							<div class="audio-bar"></div>
-							<div class="audio-bar"></div>
-							<div class="audio-bar"></div>
-							<div class="audio-bar"></div>
-							<div class="audio-bar"></div>
-						</div> -->
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- SERVICES Section with 3D Cards -->
-		<section id="services">
+		<!-- PRACTICE -->
+		<section id="practice">
 			<div class="container">
-				<div class="eyebrow mono reveal">Our Services</div>
+				<div class="eyebrow mono reveal">Our Practice</div>
 				<h2 class="reveal">Core Capabilities</h2>
 				<div class="grid cols-3" style="margin-top: 24px">
-					<article class="card card-3d reveal" data-tilt>
-						<div class="card-3d-inner">
-							<div class="visual-placeholder">
-								<div class="demo-ascii">∿∿∿∿∿∿∿ ╱ ╲ │ VOICE │ ╲ ╱ ∿∿∿∿∿∿∿</div>
-							</div>
-							<h3>AI & Voice Synthesis</h3>
-							<p>
-								Crafting synthetic voices, virtual characters, and AI-driven
-								narrators for artists and brands.
-							</p>
-							<div class="tools">
-								<img
-									src="https://via.placeholder.com/24x24/9f7aea/ffffff?text=AI"
-									alt="AI"
-									class="tool-icon"
-								/>
-								<img
-									src="https://via.placeholder.com/24x24/22d3ee/ffffff?text=RVC"
-									alt="RVC"
-									class="tool-icon"
-								/>
-								<span
-									class="mono"
-									style="font-size: 0.7rem; color: var(--muted)"
-									>RVC • So-VITS • WAN2.1</span
-								>
-							</div>
-						</div>
+					<article class="card reveal" data-tilt>
+						<h3>Immersive Environments</h3>
+						<p>
+							Designing reactive stages, projection-mapped architecture, and
+							sensory installations that respond to human presence.
+						</p>
 					</article>
-
-					<article class="card card-3d reveal" data-tilt>
-						<div class="card-3d-inner">
-							<div class="visual-placeholder" id="projection-demo">
-								<span class="mono">Projection Mapping</span>
-							</div>
-							<h3>Immersive Environments</h3>
-							<p>
-								Designing reactive stages, projection-mapped architecture, and
-								sensory installations that respond to human presence.
-							</p>
-							<div class="tools">
-								<img
-									src="https://via.placeholder.com/24x24/f472b6/ffffff?text=TD"
-									alt="TouchDesigner"
-									class="tool-icon"
-								/>
-								<img
-									src="https://via.placeholder.com/24x24/9f7aea/ffffff?text=UE"
-									alt="Unreal"
-									class="tool-icon"
-								/>
-								<span
-									class="mono"
-									style="font-size: 0.7rem; color: var(--muted)"
-									>TouchDesigner • Unreal</span
-								>
-							</div>
-						</div>
+					<article class="card reveal" data-tilt>
+						<h3>Interactive Web Worlds</h3>
+						<p>
+							Building story-driven microsites, generative archives, and
+							immersive digital platforms with WebGL.
+						</p>
 					</article>
-
-					<article class="card card-3d reveal" data-tilt>
-						<div class="card-3d-inner">
-							<div class="visual-placeholder">
-								<canvas
-									id="mini-particles"
-									style="width: 100%; height: 100%"
-								></canvas>
-							</div>
-							<h3>Web Portals</h3>
-							<p>
-								Not websites, but gateways. Interactive stories that live in
-								browsers and pull users into worlds.
-							</p>
-							<div class="tools">
-								<img
-									src="https://via.placeholder.com/24x24/22d3ee/ffffff?text=JS"
-									alt="Three.js"
-									class="tool-icon"
-								/>
-								<img
-									src="https://via.placeholder.com/24x24/f472b6/ffffff?text=WF"
-									alt="Webflow"
-									class="tool-icon"
-								/>
-								<span
-									class="mono"
-									style="font-size: 0.7rem; color: var(--muted)"
-									>Three.js • WebGL • Webflow</span
-								>
-							</div>
-						</div>
+					<article class="card reveal" data-tilt>
+						<h3>Generative Art & Design</h3>
+						<p>
+							Using algorithms as a creative partner to produce data-driven
+							visuals and infinitely variable art.
+						</p>
 					</article>
-
-					<article class="card card-3d reveal" data-tilt>
-						<div class="card-3d-inner">
-							<div class="visual-placeholder">
-								<div
-									id="generative-pattern"
-									style="width: 100%; height: 100%"
-								></div>
-							</div>
-							<h3>Generative Organisms</h3>
-							<p>
-								Art that evolves. Visuals that think. Every frame unique, born
-								from data and dreams.
-							</p>
-							<div class="tools">
-								<img
-									src="https://via.placeholder.com/24x24/9f7aea/ffffff?text=GL"
-									alt="GLSL"
-									class="tool-icon"
-								/>
-								<img
-									src="https://via.placeholder.com/24x24/22d3ee/ffffff?text=P5"
-									alt="p5.js"
-									class="tool-icon"
-								/>
-								<span
-									class="mono"
-									style="font-size: 0.7rem; color: var(--muted)"
-									>GLSL • p5.js • Processing</span
-								>
-							</div>
-						</div>
+					<article class="card reveal" data-tilt>
+						<h3>Experiential Design</h3>
+						<p>
+							Creating memorable brand activations, cultural interventions, and
+							festival installations that invite participation.
+						</p>
 					</article>
-
-					<article class="card card-3d reveal" data-tilt>
-						<div class="card-3d-inner">
-							<div class="visual-placeholder">
-								<span class="mono">Brand Activation Visual</span>
-							</div>
-							<h3>Brand Rituals</h3>
-							<p>
-								Campaigns that become cultural moments. Experiences people can't
-								ignore, have to share.
-							</p>
-							<div class="tools">
-								<img
-									src="https://via.placeholder.com/24x24/f472b6/ffffff?text=AR"
-									alt="AR"
-									class="tool-icon"
-								/>
-								<img
-									src="https://via.placeholder.com/24x24/9f7aea/ffffff?text=AI"
-									alt="AI"
-									class="tool-icon"
-								/>
-								<span
-									class="mono"
-									style="font-size: 0.7rem; color: var(--muted)"
-									>AR • AI • Sensors</span
-								>
-							</div>
-						</div>
+					<article class="card reveal" data-tilt>
+						<h3>Hybrid Systems</h3>
+						<p>
+							Engineering complex pipelines connecting Unreal, TouchDesigner, AI
+							models, and physical sensors.
+						</p>
 					</article>
-
-					<article class="card card-3d reveal" data-tilt>
-						<div class="card-3d-inner">
-							<div class="visual-placeholder">
-								<span class="mono">Hybrid Reality Demo</span>
-							</div>
-							<h3>Hybrid Realities</h3>
-							<p>
-								Where physical meets digital. Systems that feel like sorcery,
-								engineered like spacecraft.
-							</p>
-							<div class="tools">
-								<img
-									src="https://via.placeholder.com/24x24/22d3ee/ffffff?text=OSC"
-									alt="OSC"
-									class="tool-icon"
-								/>
-								<img
-									src="https://via.placeholder.com/24x24/f472b6/ffffff?text=DMX"
-									alt="DMX"
-									class="tool-icon"
-								/>
-								<span
-									class="mono"
-									style="font-size: 0.7rem; color: var(--muted)"
-									>OSC • DMX • IoT</span
-								>
-							</div>
-						</div>
+					<article class="card reveal" data-tilt>
+						<h3>AI & Voice Synthesis</h3>
+						<p>
+							Crafting synthetic voices, virtual characters, and AI-driven
+							narrators for artists and brands.
+						</p>
 					</article>
 				</div>
 			</div>
 		</section>
 
-		<!-- TOOLS Section with Infinite Marquee -->
-		<section id="tools" class="tools-section">
+		<!-- PHILOSOPHY -->
+		<section id="philosophy">
 			<div class="container">
-				<div class="eyebrow mono reveal">Our Arsenal</div>
-				<h2 class="reveal">Technologies We Master</h2>
-			</div>
-			<div style="overflow: hidden; margin-top: 40px">
-				<div class="tools-marquee">
-					<!-- Duplicate for seamless loop -->
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/9f7aea/ffffff?text=UE"
-							alt="Unreal Engine"
-						/>
-						<span class="mono">Unreal Engine</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/22d3ee/ffffff?text=TD"
-							alt="TouchDesigner"
-						/>
-						<span class="mono">TouchDesigner</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/f472b6/ffffff?text=SD"
-							alt="Stable Diffusion"
-						/>
-						<span class="mono">Stable Diffusion</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/9f7aea/ffffff?text=CUI"
-							alt="ComfyUI"
-						/>
-						<span class="mono">ComfyUI</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/22d3ee/ffffff?text=3JS"
-							alt="Three.js"
-						/>
-						<span class="mono">Three.js</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/f472b6/ffffff?text=WF"
-							alt="Webflow"
-						/>
-						<span class="mono">Webflow</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/9f7aea/ffffff?text=GL"
-							alt="GLSL"
-						/>
-						<span class="mono">GLSL Shaders</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/22d3ee/ffffff?text=MAX"
-							alt="Max/MSP"
-						/>
-						<span class="mono">Max/MSP</span>
-					</div>
-					<!-- Repeat for seamless loop -->
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/9f7aea/ffffff?text=UE"
-							alt="Unreal Engine"
-						/>
-						<span class="mono">Unreal Engine</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/22d3ee/ffffff?text=TD"
-							alt="TouchDesigner"
-						/>
-						<span class="mono">TouchDesigner</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/f472b6/ffffff?text=SD"
-							alt="Stable Diffusion"
-						/>
-						<span class="mono">Stable Diffusion</span>
-					</div>
-					<div class="tool-item">
-						<img
-							src="https://via.placeholder.com/48x48/9f7aea/ffffff?text=CUI"
-							alt="ComfyUI"
-						/>
-						<span class="mono">ComfyUI</span>
+				<div class="panel reveal" style="text-align: center">
+					<canvas
+						id="philosophy-canvas"
+						style="
+							position: absolute;
+							inset: 0;
+							width: 100%;
+							height: 100%;
+							z-index: 1;
+							border-radius: 24px;
+						"
+					></canvas>
+					<div class="panel-content">
+						<div class="eyebrow mono">Our Philosophy</div>
+						<h2>Technology should feel human, not mechanical.</h2>
+						<p style="margin-inline: auto; color: #ffffff">
+							We build with code to make people pause, feel, and remember. The
+							complexity disappears; the story remains.
+						</p>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- SHOWCASE Section with Hover Videos -->
-		<section id="showcase">
+		<!-- ARENAS (INDUSTRIES) Section with Animated Icons -->
+		<section id="arenas">
 			<div class="container">
-				<div class="eyebrow mono reveal">Portfolio</div>
-				<h2 class="reveal">Experiments & Evidence</h2>
-				<div class="grid cols-3" style="margin-top: 24px">
-					<div class="showcase-item reveal">
-						<div class="showcase-placeholder">
-							<div class="placeholder-text">
-								[PROJECT_001]<br />
-								AI Voice Symphony<br />
-								<span style="color: var(--accent2)">// loading...</span>
-							</div>
-						</div>
-					</div>
-					<div class="showcase-item reveal">
-						<div class="showcase-placeholder">
-							<div class="placeholder-text">
-								[PROJECT_002]<br />
-								Living Canvas<br />
-								<span style="color: var(--accent1)">// rendering...</span>
-							</div>
-						</div>
-					</div>
-					<div class="showcase-item reveal">
-						<div class="showcase-placeholder">
-							<div class="placeholder-text">
-								[PROJECT_003]<br />
-								Web Portal<br />
-								<span style="color: var(--accent3)">// compiling...</span>
-							</div>
-						</div>
-					</div>
-					<div class="showcase-item reveal">
-						<div class="showcase-placeholder">
-							<div class="placeholder-text">
-								[PROJECT_004]<br />
-								Projection Dreams<br />
-								<span style="color: var(--accent2)">// calibrating...</span>
-							</div>
-						</div>
-					</div>
-					<div class="showcase-item reveal">
-						<div class="showcase-placeholder">
-							<div class="placeholder-text">
-								[PROJECT_005]<br />
-								Brand Ritual<br />
-								<span style="color: var(--accent1)">// initializing...</span>
-							</div>
-						</div>
-					</div>
-					<div class="showcase-item reveal">
-						<div class="showcase-placeholder">
-							<div class="placeholder-text">
-								[PROJECT_006]<br />
-								Hybrid Reality<br />
-								<span style="color: var(--accent3)">// syncing...</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- PHILOSOPHY Section with Typewriter -->
-		<section id="philosophy" class="typewriter-section">
-			<div class="container">
-				<div class="typewriter-text reveal">
-					<span id="typewriter"></span><span class="type-cursor"></span>
-				</div>
-			</div>
-		</section>
-
-		<!-- INDUSTRIES Section with Animated Icons -->
-		<section id="industries">
-			<div class="container">
-				<div class="eyebrow mono reveal">Industries</div>
+				<div class="eyebrow mono reveal">Arenas</div>
 				<h2 class="reveal">Where Our Stories Live</h2>
 				<div class="grid cols-2" style="margin-top: 24px">
 					<div class="arena reveal card" data-tilt>
@@ -608,23 +364,45 @@
 			</div>
 		</section>
 
-		<!-- CONTACT Section -->
-		<footer id="contact" style="padding: 120px 0 140px">
+		<!-- CONTACT -->
+		<footer id="contact" style="padding: 128px 0">
 			<div class="container cta-block reveal">
-				<div class="eyebrow mono">Let's Create</div>
-				<h2>Ready to tell a story no one's told before?</h2>
-				<p>
-					We collaborate with the curious, the bold, the ones who risk wonder.
+				<div class="eyebrow mono">Get in Touch</div>
+				<h2>Have a story that needs to be told?</h2>
+				<p style="margin-inline: auto">
+					We partner with the curious, the bold, and the ones who believe in the
+					power of wonder.
 				</p>
-				<a
-					class="cta-big"
-					href="mailto:hello@oneoverzero.studio?subject=Let's create something spellbinding"
+				<div
+					class="contact-actions"
+					style="
+						margin-top: 28px;
+						display: flex;
+						gap: 12px;
+						flex-wrap: wrap;
+						justify-content: center;
+					"
 				>
-					<span class="mono">→ hello@oneoverzero.studio</span>
-				</a>
+					<a
+						class="cta-big"
+						href="mailto:hiren@metalfinger.xyz"
+						aria-label="Email Hiren at hiren@metalfinger.xyz"
+					>
+						<span class="mono">→ Email Us</span>
+					</a>
+					<a
+						class="cta-big"
+						href="https://wa.me/919986034136"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Open WhatsApp chat with +91 99860 34136"
+					>
+						<span class="mono">→ Message on WhatsApp</span>
+					</a>
+				</div>
 			</div>
 		</footer>
 
-		<script src="script.js"></script>
+		<script src="scriptref.js"></script>
 	</body>
 </html>
