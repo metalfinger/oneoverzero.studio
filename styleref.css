@@ -9,6 +9,91 @@
 	--glow: 0 0 2rem rgba(159, 122, 234, 0.28), 0 0 4rem rgba(34, 211, 238, 0.18);
 }
 
+/* Local Nohemi font faces */
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-Thin-BF6438cc57e2011.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-Thin-BF6438cc5896c67.ttf") format("truetype");
+	font-weight: 100;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-ExtraLight-BF6438cc581502c.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-ExtraLight-BF6438cc58a2634.ttf") format("truetype");
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-Light-BF6438cc5702321.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-Light-BF6438cc5899919.ttf") format("truetype");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-Regular-BF6438cc579d934.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-Regular-BF6438cc4d0e493.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-Medium-BF6438cc57ddecd.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-Medium-BF6438cc5883899.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-SemiBold-BF6438cc57db2ff.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-SemiBold-BF6438cc588a48a.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-Bold-BF6438cc577b524.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-Bold-BF6438cc587b5b5.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-ExtraBold-BF6438cc5761ae2.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-ExtraBold-BF6438cc5881baf.ttf") format("truetype");
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Nohemi";
+	src: url("/Nohemi-Font/Nohemi-Black-BF6438cc565e67b.woff") format("woff"),
+		url("/Nohemi-Font/Nohemi-Black-BF6438cc58744d4.ttf") format("truetype");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--bg: #0b0b11;
+	--fg: #e7e7ec;
+	--muted: #9aa0a6;
+	--accent1: #9f7aea;
+	--accent2: #22d3ee;
+	--accent3: #f472b6;
+	--glass: rgba(255, 255, 255, 0.04);
+	--glow: 0 0 2rem rgba(159, 122, 234, 0.28), 0 0 4rem rgba(34, 211, 238, 0.18);
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -19,9 +104,11 @@ body {
 	margin: 0;
 	background: var(--bg);
 	color: var(--fg);
-	font-family: "Satoshi", sans-serif;
+	font-family: "Nohemi", "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, sans-serif;
 	line-height: 1.5;
 	overflow-x: hidden;
+	letter-spacing: 0.05em;
 }
 
 a {
@@ -50,7 +137,8 @@ h1,
 h2 {
 	line-height: 1.1;
 	margin: 0 0 1rem;
-	font-weight: 900;
+	/* Slightly reduced weight for improved readability */
+	font-weight: 800;
 }
 h1 {
 	font-size: clamp(2.5rem, 6vw, 5rem);
@@ -59,10 +147,21 @@ h2 {
 	font-size: clamp(2rem, 4vw, 3rem);
 }
 p {
+	font-family: "Satoshi", sans-serif;
 	color: #c9c9d3;
 	font-size: clamp(1rem, 1.2vw, 1.35rem);
 	font-weight: 400;
 	max-width: 65ch;
+}
+
+/* Add subtle character spacing for paragraph and body text (excluding monospace/eyebrow styles) */
+p,
+.sub,
+.card p,
+.panel-content p,
+.who-text p,
+section p {
+	letter-spacing: 0.02em;
 }
 
 /* Skip link for a11y */
@@ -190,21 +289,24 @@ p {
 	border-radius: 0.75rem;
 	font-weight: 700;
 	font-size: 0.92rem;
-	background: radial-gradient(
-		120% 120% at 80% 0%,
-		rgba(34, 211, 238, 0.25),
-		rgba(159, 122, 234, 0.18)
+	/* animated moving gradient */
+	background: linear-gradient(
+		90deg,
+		rgba(34, 211, 238, 0.24) 0%,
+		rgba(159, 122, 234, 0.22) 25%,
+		rgba(244, 114, 182, 0.18) 50%,
+		rgba(159, 122, 234, 0.22) 75%,
+		rgba(34, 211, 238, 0.24) 100%
 	);
+	background-size: 300% 100%;
+	/* continuous faster animation */
+	animation: gradient-move 3s linear infinite;
 	border: 0.0625rem solid rgba(255, 255, 255, 0.1);
 	transition: transform 0.2s ease, background 0.4s ease;
 }
 .cta-nav:hover {
 	transform: translateY(-0.125rem);
-	background: radial-gradient(
-		140% 140% at 70% -10%,
-		rgba(34, 211, 238, 0.45),
-		rgba(159, 122, 234, 0.28)
-	);
+	filter: brightness(1.06);
 }
 
 /* HERO Section */
@@ -1075,13 +1177,6 @@ canvas#aether {
 	color: var(--fg);
 }
 
-.arena p {
-	margin: 0;
-	font-size: 0.95rem;
-	line-height: 1.5;
-	color: var(--muted);
-}
-
 @media (max-width: 640px) {
 	.arena.card {
 		flex-direction: column;
@@ -1111,10 +1206,15 @@ canvas#aether {
 	border-radius: 0.875rem;
 	border: 0.0625rem solid rgba(255, 255, 255, 0.12);
 	background: linear-gradient(
-		180deg,
-		rgba(159, 122, 234, 0.18),
-		rgba(34, 211, 238, 0.16)
+		90deg,
+		rgba(159, 122, 234, 0.2) 0%,
+		rgba(34, 211, 238, 0.18) 40%,
+		rgba(244, 114, 182, 0.16) 70%,
+		rgba(159, 122, 234, 0.2) 100%
 	);
+	background-size: 300% 100%;
+	/* continuous faster animation */
+	animation: gradient-move 3s linear infinite;
 	font-weight: 800;
 	font-size: 1.1rem;
 	transition: all 0.3s ease;
@@ -1123,6 +1223,19 @@ canvas#aether {
 	filter: brightness(1.1);
 	transform: translateY(-0.1875rem);
 	box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
+}
+
+/* Animated gradient keyframes */
+@keyframes gradient-move {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 form[name="contact"] {
 	margin-top: 1.5rem;
@@ -1160,5 +1273,6 @@ form[name="contact"] button {
 	.cta-nav,
 	.cta-big {
 		transition: none;
+		animation: none !important;
 	}
 }
