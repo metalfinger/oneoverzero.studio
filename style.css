@@ -142,6 +142,16 @@ a {
 section {
 	padding: 8rem 0;
 }
+
+@media (max-width: 768px) {
+	section {
+		padding: 3rem 0;
+	}
+	
+	#who {
+		padding: 1.5rem 0;
+	}
+}
 .eyebrow {
 	letter-spacing: 0.2em;
 	text-transform: uppercase;
@@ -836,6 +846,21 @@ canvas#aether {
 	padding: 2.5rem 0;
 }
 
+@media (max-width: 768px) {
+	.who-content {
+		grid-template-columns: 1fr;
+		gap: 3.75rem;
+		text-align: center;
+		min-height: auto;
+		padding: 4rem 0;
+	}
+	
+	.who-visual {
+		height: auto;
+		min-height: 20rem;
+	}
+}
+
 .who-visual {
 	position: relative;
 	height: 31.25rem;
@@ -1078,13 +1103,15 @@ canvas#aether {
 @media (max-width: 768px) {
 	.who-content {
 		grid-template-columns: 1fr;
-		gap: 3.75rem;
+		gap: 2rem;
 		text-align: center;
 		min-height: auto;
+		padding: 3rem 0;
 	}
 
 	.who-visual {
-		height: 21.875rem;
+		height: auto;
+		min-height: 12rem;
 		margin: 0 auto;
 	}
 
