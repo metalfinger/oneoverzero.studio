@@ -129,6 +129,11 @@ body {
 a {
 	color: var(--fg);
 	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+a:hover {
+	color: var(--accent2);
 }
 .mono {
 	font-family: "JetBrains Mono", monospace;
@@ -191,24 +196,33 @@ section p {
 }
 
 /* Skip link for a11y */
-.skip {
+.skip-link {
 	position: absolute;
-	left: -624.9375rem;
-	top: auto;
-	width: 0.0625rem;
-	height: 0.0625rem;
-	overflow: hidden;
-}
-.skip:focus {
-	left: 1rem;
+	left: -9999px;
 	top: 1rem;
-	width: auto;
-	height: auto;
+	z-index: 9999;
 	background: #111;
 	color: #fff;
-	padding: 0.5rem 0.625rem;
-	border-radius: 0.5rem;
-	z-index: 100;
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	border-radius: 0.25rem;
+}
+
+.skip-link:focus {
+	left: 1rem;
+}
+
+.skip {
+	display: none;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+	outline: 2px solid var(--accent2);
+	outline-offset: 2px;
 }
 
 /* Navigation */
@@ -303,10 +317,12 @@ section p {
 	opacity: 0.9;
 	font-weight: 500;
 	font-size: 0.92rem;
-	transition: color 0.2s;
+	transition: color 0.2s, opacity 0.2s;
 }
+
 .nav a.link:hover {
 	color: var(--accent2);
+	opacity: 1;
 }
 .spacer {
 	flex: 1;
@@ -333,7 +349,7 @@ section p {
 		);
 	background-blend-mode: screen;
 	background-size: 300% 100%;
-	animation: gradient-move 3s linear infinite;
+	animation: gradient-move-slow 6s ease-in-out infinite;
 	border: 0.0625rem solid rgba(255, 255, 255, 0.08);
 	box-shadow: 0 6px 18px rgba(34, 211, 238, 0.06),
 		0 2px 8px rgba(159, 122, 234, 0.05);
@@ -1215,7 +1231,7 @@ canvas#aether {
 	}
 }
 
-/* Service Cards */
+/* Card hover and touch improvements */
 .card {
 	position: relative;
 	overflow: hidden;
@@ -1230,6 +1246,7 @@ canvas#aether {
 	transform-style: preserve-3d;
 	transition: transform 0.3s ease, border-color 0.3s;
 	will-change: transform;
+	touch-action: manipulation;
 }
 .card:hover {
 	border-color: rgba(255, 255, 255, 0.2);
@@ -1368,6 +1385,7 @@ canvas#aether {
 	align-items: center;
 	padding: 1rem 1.5rem;
 	border-radius: 0.875rem;
+	touch-action: manipulation;
 }
 .cta-big:hover {
 	filter: brightness(1.1);
@@ -1392,8 +1410,8 @@ canvas#aether {
 			transparent 30%
 		);
 	background-blend-mode: screen;
-	background-size: 260% 100%;
-	animation: gradient-move 3.2s linear infinite;
+	background-size: 300% 100%;
+	animation: gradient-move 2.5s ease-in-out infinite;
 	font-weight: 800;
 	font-size: 1.1rem;
 	transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.2s ease;
@@ -1432,7 +1450,16 @@ canvas#aether {
 		background-position: 100% 50%;
 	}
 	100% {
+		background-position: 200% 50%;
+	}
+}
+
+@keyframes gradient-move-slow {
+	0% {
 		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 200% 50%;
 	}
 }
 form[name="contact"] {
@@ -1456,6 +1483,14 @@ form[name="contact"] textarea {
 	color: var(--fg);
 	font-family: "Satoshi", sans-serif;
 	font-size: 1rem;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form[name="contact"] input:focus,
+form[name="contact"] textarea:focus {
+	border-color: var(--accent2);
+	box-shadow: 0 0 0 0.125rem rgba(34, 211, 238, 0.3);
+	outline: none;
 }
 form[name="contact"] button {
 	margin-top: 0.75rem;
@@ -1480,12 +1515,19 @@ form[name="contact"] button[type="submit"] {
 	border-radius: 0.75rem;
 	font-weight: 700;
 	transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.18s ease;
+	background-blend-mode: screen;
+	background-size: 300% 100%;
+	animation: gradient-move 2.5s ease-in-out infinite;
 }
 form[name="contact"] button[type="submit"]:hover {
 	transform: translateY(-0.18rem) scale(1.01);
 	filter: brightness(1.06);
 	box-shadow: 0 14px 28px rgba(34, 211, 238, 0.08),
 		0 6px 18px rgba(159, 122, 234, 0.05);
+}
+
+form[name="contact"] button[type="submit"] {
+	touch-action: manipulation;
 }
 
 /* Animation Timing Hierarchy */

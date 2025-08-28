@@ -40,6 +40,14 @@
 		<link rel="alternate icon" href="/assets/logo.svg" />
 		<link rel="apple-touch-icon" href="/assets/logo.svg" />
 
+		<!-- Resource Preloading -->
+		<link rel="preload" href="/Nohemi-Font/Nohemi-Bold-BF6438cc577b524.woff" as="font" type="font/woff" crossorigin>
+		<link rel="preload" href="/Nohemi-Font/Nohemi-Black-BF6438cc565e67b.woff" as="font" type="font/woff" crossorigin>
+		<link rel="preload" href="/assets/logo.svg" as="image">
+		<link rel="preload" href="/assets/services/immersive-environments.webp" as="image" type="image/webp">
+		<link rel="preload" href="/assets/services/web.webp" as="image" type="image/webp">
+		<link rel="preload" href="/assets/services/generative.webp" as="image" type="image/webp">
+
 		<!-- Canonical URL -->
 		<link rel="canonical" href="https://oneoverzero.studio/" />
 
@@ -74,6 +82,7 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
+		<a href="#main-content" class="skip-link">Skip to main content</a>
 		<!-- NAV -->
 		<nav class="nav nav-hidden" aria-label="primary">
 			<div class="brand">
@@ -85,10 +94,10 @@
 				</div>
 			</div>
 			<div class="spacer"></div>
-			<a class="link" href="#practice">Services</a>
-			<a class="link" href="#philosophy">Philosophy</a>
-			<a class="link" href="#industry">Industries</a>
-			<a class="cta-nav" href="#contact">Contact</a>
+			<a class="link" href="#practice" aria-label="View our services">Services</a>
+			<a class="link" href="#philosophy" aria-label="Learn our philosophy">Philosophy</a>
+			<a class="link" href="#industry" aria-label="View our industries">Industries</a>
+			<a class="cta-nav" href="#contact" aria-label="Contact us">Contact</a>
 		</nav>
 
 		<!-- HERO -->
@@ -144,7 +153,7 @@
 		</header>
 
 		<!-- WHO / MYTH -->
-		<section id="who">
+		<section id="who" role="region" aria-labelledby="who-heading" tabindex="-1">
 			<div class="section-floating-elements">
 				<div class="float-element" style="--delay: 0s"></div>
 				<div class="float-element" style="--delay: 1s"></div>
@@ -169,7 +178,7 @@
 					</div>
 					<div class="who-text">
 						<div class="eyebrow mono">What is 1/0?</div>
-						<h2>A design studio where code, art, and humanity converge.</h2>
+						<h2 id="who-heading">A design studio where code, art, and humanity converge.</h2>
 						<p>
 							We craft evocative experiences with new technologies. Our process
 							is about hiding the machine to reveal the feeling, leaving only a
@@ -181,17 +190,17 @@
 		</section>
 
 		<!-- PRACTICE -->
-		<section id="practice">
+		<section id="practice" role="region" aria-labelledby="practice-heading">
 			<div class="container">
 				<div class="eyebrow mono reveal">Our Practice</div>
-				<h2 class="reveal">Core Capabilities</h2>
+				<h2 id="practice-heading" class="reveal">Core Capabilities</h2>
 				<div class="grid cols-3" style="margin-top: 24px">
 					<article class="card reveal" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/services/immersive-environments.png"
-								alt="Immersive Environments"
-							/>
+							<picture>
+								<source srcset="/assets/services/immersive-environments.webp" type="image/webp">
+								<img src="/assets/services/immersive-environments.png" alt="Immersive Environments" loading="lazy">
+							</picture>
 						</div>
 
 						<div class="practice-text">
@@ -204,10 +213,10 @@
 					</article>
 					<article class="card reveal" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/services/web.png"
-								alt="Interactive Web Worlds"
-							/>
+							<picture>
+								<source srcset="/assets/services/web.webp" type="image/webp">
+								<img src="/assets/services/web.png" alt="Interactive Web Worlds" loading="lazy">
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Interactive Web Worlds</h3>
@@ -217,12 +226,12 @@
 							</p>
 						</div>
 					</article>
-					<article class="card reveal" data-tilt>
+										<article class="card reveal" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/services/generative.png"
-								alt="Generative Art & Design"
-							/>
+							<picture>
+								<source srcset="/assets/services/generative.webp" type="image/webp">
+								<img src="/assets/services/generative.png" alt="Generative Art & Design" loading="lazy">
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Generative Art & Design</h3>
@@ -234,10 +243,10 @@
 					</article>
 					<article class="card reveal" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/services/experimental.png"
-								alt="Experiential Design"
-							/>
+							<picture>
+								<source srcset="/assets/services/experimental.webp" type="image/webp">
+								<img src="/assets/services/experimental.png" alt="Experiential Design" loading="lazy">
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Experiential Design</h3>
@@ -249,10 +258,10 @@
 					</article>
 					<article class="card reveal" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/services/hybrid-system.png"
-								alt="Hybrid Systems"
-							/>
+							<picture>
+								<source srcset="/assets/services/hybrid-system.webp" type="image/webp">
+								<img src="/assets/services/hybrid-system.png" alt="Hybrid Systems" loading="lazy">
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Hybrid Systems</h3>
@@ -264,10 +273,10 @@
 					</article>
 					<article class="card reveal" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/services/voice.png"
-								alt="AI & Voice Synthesis"
-							/>
+							<picture>
+								<source srcset="/assets/services/voice.webp" type="image/webp">
+								<img src="/assets/services/voice.png" alt="AI & Voice Synthesis" loading="lazy">
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>AI & Voice Synthesis</h3>
@@ -282,7 +291,7 @@
 		</section>
 
 		<!-- PHILOSOPHY -->
-		<section id="philosophy">
+		<section id="philosophy" role="region" aria-labelledby="philosophy-heading">
 			<div class="container">
 				<div class="panel reveal" style="text-align: center">
 					<canvas
@@ -298,7 +307,7 @@
 					></canvas>
 					<div class="panel-content">
 						<div class="eyebrow mono">Our Philosophy</div>
-						<h2>Technology should feel human, not mechanical.</h2>
+						<h2 id="philosophy-heading">Technology should feel human, not mechanical.</h2>
 						<p style="margin-inline: auto; color: #ffffff">
 							We build with code to make people pause, feel, and remember. The
 							complexity disappears; the story remains.
@@ -309,14 +318,17 @@
 		</section>
 
 		<!-- industry (INDUSTRIES) Section with Animated Icons -->
-		<section id="industry">
+		<section id="industry" role="region" aria-labelledby="industry-heading">
 			<div class="container">
 				<div class="eyebrow mono reveal">Industries</div>
-				<h2 class="reveal">Where Our Stories Live</h2>
+				<h2 id="industry-heading" class="reveal">Where Our Stories Live</h2>
 				<div class="grid cols-2" style="margin-top: 24px">
 					<article class="arena reveal card" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img src="/assets/industry/music.png" alt="Music & Stages" />
+							<picture>
+								<source srcset="/assets/industry/music.webp" type="image/webp">
+								<img src="/assets/industry/music.png" alt="Music & Stages" loading="lazy" />
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Music & Stages</h3>
@@ -328,10 +340,14 @@
 					</article>
 					<article class="arena reveal card" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/industry/film-screens.png"
-								alt="Film & Screens"
-							/>
+							<picture>
+								<source srcset="/assets/industry/film-screens.webp" type="image/webp">
+								<img
+									src="/assets/industry/film-screens.png"
+									alt="Film & Screens"
+									loading="lazy"
+								/>
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Film & Screens</h3>
@@ -343,10 +359,14 @@
 					</article>
 					<article class="arena reveal card" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/industry/brand-marketing.png"
-								alt="Brands & Marketing"
-							/>
+							<picture>
+								<source srcset="/assets/industry/brand-marketing.webp" type="image/webp">
+								<img
+									src="/assets/industry/brand-marketing.png"
+									alt="Brands & Marketing"
+									loading="lazy"
+								/>
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Brands & Marketing</h3>
@@ -358,10 +378,14 @@
 					</article>
 					<article class="arena reveal card" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/industry/culture-festivals.png"
-								alt="Culture & Festivals"
-							/>
+							<picture>
+								<source srcset="/assets/industry/culture-festivals.webp" type="image/webp">
+								<img
+									src="/assets/industry/culture-festivals.png"
+									alt="Culture & Festivals"
+									loading="lazy"
+								/>
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Culture & Festivals</h3>
@@ -373,7 +397,10 @@
 					</article>
 					<article class="arena reveal card" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img src="/assets/industry/tech-expo.png" alt="Tech & Expos" />
+							<picture>
+								<source srcset="/assets/industry/tech-expo.webp" type="image/webp">
+								<img src="/assets/industry/tech-expo.png" alt="Tech & Expos" loading="lazy" />
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Tech & Expos</h3>
@@ -384,10 +411,14 @@
 					</article>
 					<article class="arena reveal card" data-tilt>
 						<div class="service-icon" aria-hidden="true">
-							<img
-								src="/assets/industry/luxuty-retail.png"
-								alt="Luxury & Retail"
-							/>
+							<picture>
+								<source srcset="/assets/industry/luxuty-retail.webp" type="image/webp">
+								<img
+									src="/assets/industry/luxuty-retail.png"
+									alt="Luxury & Retail"
+									loading="lazy"
+								/>
+							</picture>
 						</div>
 						<div class="practice-text">
 							<h3>Luxury & Retail</h3>
@@ -402,10 +433,10 @@
 		</section>
 
 		<!-- CONTACT -->
-		<footer id="contact" style="padding: 128px 0">
+		<footer id="contact" role="contentinfo" style="padding: 128px 0">
 			<div class="container cta-block reveal">
 				<div class="eyebrow mono">Get in Touch</div>
-				<h2>Have a story that needs to be told?</h2>
+				<h2 id="contact-heading">Have a story that needs to be told?</h2>
 				<p style="margin-inline: auto">
 					We partner with the curious, the bold, and the ones who believe in the
 					power of wonder.
@@ -421,25 +452,25 @@
 					"
 				>
 					<a
-						class="cta-big"
-						href="mailto:hiren@metalfinger.xyz"
-						aria-label="Email Hiren at hiren@metalfinger.xyz"
-					>
-						<span class="mono">Email Us</span>
-					</a>
-					<a
-						class="cta-big"
-						href="https://wa.me/919986034136"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Open WhatsApp chat with +91 99860 34136"
-					>
-						<span class="mono">Message on WhatsApp</span>
-					</a>
+					class="cta-big"
+					href="mailto:hiren@metalfinger.xyz"
+					aria-label="Email Hiren at hiren@metalfinger.xyz"
+				>
+					<span class="mono">Email Us</span>
+				</a>
+				<a
+					class="cta-big"
+					href="https://wa.me/919986034136"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="Open WhatsApp chat with +91 99860 34136"
+				>
+					<span class="mono">Message on WhatsApp</span>
+				</a>
 				</div>
 			</div>
 		</footer>
 
-		<script src="script.js"></script>
+		<script type="module" src="js/main.js"></script>
 	</body>
 </html>
