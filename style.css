@@ -802,6 +802,7 @@ canvas#aether {
 	transform: translateY(1.25rem);
 	filter: blur(0.5rem);
 	transition: opacity 1s ease, transform 1s ease, filter 1.2s ease;
+	transition-delay: calc(var(--reveal-delay, 0) * 1s);
 }
 .reveal.in {
 	opacity: 1;
@@ -1485,6 +1486,48 @@ form[name="contact"] button[type="submit"]:hover {
 	filter: brightness(1.06);
 	box-shadow: 0 14px 28px rgba(34, 211, 238, 0.08),
 		0 6px 18px rgba(159, 122, 234, 0.05);
+}
+
+/* Animation Timing Hierarchy */
+.eyebrow.reveal {
+	--reveal-delay: 0.1;
+}
+
+h2.reveal {
+	--reveal-delay: 0.2;
+}
+
+.reveal.panel {
+	--reveal-delay: 0.3;
+}
+
+p.reveal, .who-text p {
+	--reveal-delay: 0.3;
+}
+
+.who-text .eyebrow {
+	--reveal-delay: 0.1;
+}
+
+.who-text h2 {
+	--reveal-delay: 0.2;
+}
+
+/* Contact section hierarchy */
+.cta-block .eyebrow {
+	--reveal-delay: 0.1;
+}
+
+.cta-block h2 {
+	--reveal-delay: 0.2;
+}
+
+.cta-block p {
+	--reveal-delay: 0.3;
+}
+
+.contact-actions {
+	--reveal-delay: 0.4;
 }
 
 /* Reduced motion */

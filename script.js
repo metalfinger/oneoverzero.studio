@@ -271,6 +271,19 @@ document.addEventListener("DOMContentLoaded", () => {
 		(entries) => {
 			entries.forEach((e) => {
 				if (e.isIntersecting) {
+					// Check if this is a card element for staggered animation
+					if (e.target.classList.contains("card")) {
+						// Get all cards in the same grid
+						const parentGrid = e.target.closest(".grid");
+						if (parentGrid) {
+							const cards = Array.from(parentGrid.querySelectorAll(".card"));
+							const index = cards.indexOf(e.target);
+							// Add staggered delay (0.08s per card for a smoother flow)
+							e.target.style.setProperty("--reveal-delay", index * 0.08);
+						}
+					}
+					
+					// Add the 'in' class to trigger animation
 					e.target.classList.add("in");
 					io.unobserve(e.target);
 				}
