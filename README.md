@@ -117,6 +117,13 @@ Contains custom Nohemi font files in various weights and formats:
 - Thin, ExtraLight, Light, Regular, Medium, SemiBold, Bold, ExtraBold, Black
 - Both WOFF and TTF formats for cross-browser compatibility
 
+### Social Media Content Hub Directory
+
+**`social/`** - Dedicated content hub for social media team:
+- Customizable animation templates for creating branded content
+- Editor tools for glitch text and floating dots animations
+- See `social/README.md` and `social/DOCUMENTATION.md` for details
+
 ## Technical Features
 
 ### Performance Optimizations
