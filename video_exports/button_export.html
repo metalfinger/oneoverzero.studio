@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Gradient Export</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0b0b11;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .cta-big {
+            position: relative;
+            overflow: hidden;
+            border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(
+                    90deg,
+                    rgba(159, 122, 234, 0.22) 0%,
+                    rgba(34, 211, 238, 0.18) 45%,
+                    rgba(244, 114, 182, 0.17) 75%,
+                    rgba(159, 122, 234, 0.22) 100%
+                ),
+                radial-gradient(
+                    80% 60% at 90% 10%,
+                    rgba(255, 255, 255, 0.03),
+                    transparent 30%
+                );
+            background-blend-mode: screen;
+            background-size: 300% 100%;
+            animation: gradient-move 2.5s ease-in-out infinite;
+            font-weight: 800;
+            font-size: 1.1rem;
+            width: 1920px;
+            height: 1920px;
+            border-radius: 0.875rem;
+        }
+        .cta-big::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                100deg,
+                rgba(255, 255, 255, 0.05),
+                rgba(255, 255, 255, 0) 45%
+            );
+            mix-blend-mode: overlay;
+            opacity: 0.7;
+            transform: translateX(-50%);
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1);
+            pointer-events: none;
+        }
+
+        @keyframes gradient-move {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cta-big"></div>
+</body>
+</html>
