@@ -5,6 +5,8 @@ This directory contains standalone HTML/JS files for each component you want to 
 1. **Hero Background** (`hero_export.html`/`hero_export.js`) - The particle animation from the hero section
 2. **Button Gradient** (`button_export.html`) - The animated gradient background used in buttons
 3. **Philosophy Shader** (`philosophy_export.html`/`philosophy_export.js`) - The fragment shader from the philosophy section
+4. **Floating Dots** (`floating_dots_export.html`) - The floating dots animation from the WHO section
+5. **Glitch Text** (`glitch_text_export.html`) - The complete hero section experience with the particle background and "Stories written in code. Emotions carved from pixels." text animation (plays once)
 
 ## Recording Instructions
 
@@ -36,6 +38,12 @@ ffmpeg -f gdigrab -framerate 60 -video_size 1920x1080 -i http://localhost:8000/v
 
 # For the philosophy shader (record at 1920x1080)
 ffmpeg -f gdigrab -framerate 60 -video_size 1920x1080 -i http://localhost:8000/video_exports/philosophy_export.html -t 15 -c:v libx264 -pix_fmt yuv420p philosophy_shader.mp4
+
+# For the floating dots background (record at 1920x1080)
+ffmpeg -f gdigrab -framerate 60 -video_size 1920x1080 -i http://localhost:8000/video_exports/floating_dots_export.html -t 15 -c:v libx264 -pix_fmt yuv420p floating_dots.mp4
+
+# For the glitch text animation (record at 1920x1080)
+ffmpeg -f gdigrab -framerate 60 -video_size 1920x1080 -i http://localhost:8000/video_exports/glitch_text_export.html -t 15 -c:v libx264 -pix_fmt yuv420p glitch_text.mp4
 ```
 
 ## Serving Files Locally
@@ -53,3 +61,5 @@ Then access the files at:
 - http://localhost:8000/video_exports/hero_export.html
 - http://localhost:8000/video_exports/button_export.html
 - http://localhost:8000/video_exports/philosophy_export.html
+- http://localhost:8000/video_exports/floating_dots_export.html
+- http://localhost:8000/video_exports/glitch_text_export.html

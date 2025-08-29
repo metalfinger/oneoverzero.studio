@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Dots Background Export</title>
+    <style>
+        :root {
+            --bg: #0b0b11;
+            --accent1: #9f7aea;
+            --accent2: #22d3ee;
+            --accent3: #f472b6;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        .section-floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .float-element {
+            position: absolute;
+            width: 0.375rem;
+            height: 0.375rem;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+            box-shadow: 0 0 1.25rem currentColor;
+        }
+        
+        .float-element:nth-child(1) {
+            top: 10%;
+            left: 15%;
+            background: var(--accent1);
+            animation-duration: 9s;
+        }
+        
+        .float-element:nth-child(2) {
+            top: 25%;
+            left: 75%;
+            background: var(--accent2);
+            animation-duration: 11s;
+        }
+        
+        .float-element:nth-child(3) {
+            top: 45%;
+            left: 10%;
+            background: var(--accent3);
+            animation-duration: 7s;
+        }
+        
+        .float-element:nth-child(4) {
+            top: 15%;
+            left: 90%;
+            background: var(--accent1);
+            animation-duration: 10s;
+            opacity: 0.5;
+        }
+        
+        .float-element:nth-child(5) {
+            top: 60%;
+            left: 85%;
+            background: var(--accent2);
+            animation-duration: 8.5s;
+            opacity: 0.6;
+        }
+        
+        .float-element:nth-child(6) {
+            top: 80%;
+            left: 20%;
+            background: var(--accent3);
+            animation-duration: 12s;
+            opacity: 0.4;
+        }
+        
+        .float-element:nth-child(7) {
+            top: 35%;
+            left: 50%;
+            background: var(--accent1);
+            animation-duration: 9.5s;
+            opacity: 0.5;
+        }
+        
+        .float-element:nth-child(8) {
+            top: 70%;
+            left: 65%;
+            background: var(--accent2);
+            animation-duration: 7.5s;
+            opacity: 0.6;
+        }
+        
+        .float-element:nth-child(9) {
+            top: 90%;
+            left: 45%;
+            background: var(--accent3);
+            animation-duration: 11.5s;
+            opacity: 0.4;
+        }
+        
+        .float-element:nth-child(10) {
+            top: 5%;
+            left: 40%;
+            background: var(--accent1);
+            animation-duration: 8s;
+            opacity: 0.3;
+        }
+        
+        .float-element:nth-child(11) {
+            top: 55%;
+            left: 5%;
+            background: var(--accent2);
+            animation-duration: 10.5s;
+            opacity: 0.5;
+        }
+        
+        .float-element:nth-child(12) {
+            top: 75%;
+            left: 95%;
+            background: var(--accent3);
+            animation-duration: 9s;
+            opacity: 0.4;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.7;
+            }
+            33% {
+                transform: translate(-0.9375rem, -1.5625rem) scale(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translate(1.25rem, -0.625rem) scale(0.9);
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section-floating-elements">
+        <div class="float-element" style="--delay: 0s"></div>
+        <div class="float-element" style="--delay: 1s"></div>
+        <div class="float-element" style="--delay: 2s"></div>
+        <div class="float-element" style="--delay: 3s"></div>
+        <div class="float-element" style="--delay: 4s"></div>
+        <div class="float-element" style="--delay: 5s"></div>
+        <div class="float-element" style="--delay: 6s"></div>
+        <div class="float-element" style="--delay: 7s"></div>
+        <div class="float-element" style="--delay: 8s"></div>
+        <div class="float-element" style="--delay: 9s"></div>
+        <div class="float-element" style="--delay: 10s"></div>
+        <div class="float-element" style="--delay: 11s"></div>
+    </div>
+</body>
+</html>

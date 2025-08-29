@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Dots Editor - oneoverzero</title>
+    <style>
+        :root {
+            --bg: #0b0b11;
+            --fg: #e7e7ec;
+            --muted: #9aa0a6;
+            --accent1: #9f7aea;
+            --accent2: #22d3ee;
+            --accent3: #f472b6;
+            --glass: rgba(255, 255, 255, 0.04);
+            --glow: 0 0 2rem rgba(159, 122, 234, 0.28), 0 0 4rem rgba(34, 211, 238, 0.18);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            font-family: "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto,
+                "Helvetica Neue", Arial, sans-serif;
+            color: var(--fg);
+        }
+        
+        /* Social Media Header */
+        .social-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(11, 11, 17, 0.9);
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .social-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-logo img {
+            height: 30px;
+        }
+        
+        .social-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--fg);
+        }
+        
+        .back-link {
+            color: var(--accent2);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Editor Panel */
+        .editor-panel {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(11, 11, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .editor-panel h3 {
+            margin-top: 0;
+            color: var(--fg);
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: var(--fg);
+        }
+
+        .form-group input[type="range"] {
+            width: 100%;
+        }
+
+        .value-display {
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .editor-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .editor-button {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-family: "Satoshi", sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .preview-button {
+            background: linear-gradient(90deg, rgba(159, 122, 234, 0.22) 0%, rgba(34, 211, 238, 0.18) 45%, rgba(244, 114, 182, 0.17) 75%, rgba(159, 122, 238, 0.22) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--fg);
+        }
+
+        .preview-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(34, 211, 238, 0.2);
+        }
+
+        .reset-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--fg);
+        }
+
+        .reset-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .editor-hidden {
+            display: none;
+        }
+        
+        /* Animation Container */
+        .section-floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .float-element {
+            position: absolute;
+            width: 0.375rem;
+            height: 0.375rem;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 8s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+            box-shadow: 0 0 1.25rem currentColor;
+            background: var(--accent-color);
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.7;
+            }
+            33% {
+                transform: translate(-0.9375rem, -1.5625rem) scale(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translate(1.25rem, -0.625rem) scale(0.9);
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Social Media Header -->
+    <div class="social-header">
+        <div class="social-logo">
+            <img src="/assets/logo.svg" alt="oneoverzero logo">
+            <div class="social-title">Floating Dots Editor</div>
+        </div>
+        <a href="/social/" class="back-link">← Back to Hub</a>
+    </div>
+    
+    <!-- Editor Panel -->
+    <div class="editor-panel">
+        <h3>Customize Floating Dots</h3>
+        
+        <div class="form-group">
+            <label for="dot-count">Number of Dots</label>
+            <input type="range" id="dot-count" min="1" max="200" value="12">
+            <div class="value-display"><span id="dot-count-value">12</span> dots</div>
+        </div>
+        
+        <div class="editor-buttons">
+            <button class="editor-button preview-button" id="preview-button">Hide Editor & Record</button>
+            <button class="editor-button reset-button" id="reset-button">Reset to 12 Dots</button>
+        </div>
+    </div>
+    
+    <!-- Animation Container -->
+    <div class="section-floating-elements" id="floating-container"></div>
+    
+    <script>
+        // Default settings
+        const defaultDotCount = 12;
+        
+        // DOM elements
+        const container = document.getElementById('floating-container');
+        const dotCountSlider = document.getElementById('dot-count');
+        const dotCountValue = document.getElementById('dot-count-value');
+        
+        // Initialize slider value display
+        function initSliderDisplay() {
+            dotCountSlider.addEventListener('input', function() {
+                dotCountValue.textContent = this.value;
+                // Live update as slider moves
+                createFloatingDots(parseInt(this.value));
+            });
+        }
+        
+        // Generate random positions for dots
+        function generateRandomPositions(count) {
+            const positions = [];
+            for (let i = 0; i < count; i++) {
+                positions.push({
+                    top: Math.random() * 100,
+                    left: Math.random() * 100
+                });
+            }
+            return positions;
+        }
+        
+        // Generate delays for staggered animation
+        function generateDelays(count) {
+            const delays = [];
+            for (let i = 0; i < count; i++) {
+                delays.push(i * 0.5); // 0.5 second increment
+            }
+            return delays;
+        }
+        
+        // Generate colors by cycling through the accent colors
+        function generateColors(count) {
+            const colors = ['#9f7aea', '#22d3ee', '#f472b6'];
+            const colorList = [];
+            for (let i = 0; i < count; i++) {
+                colorList.push(colors[i % colors.length]);
+            }
+            return colorList;
+        }
+        
+        // Create floating dots with current settings
+        function createFloatingDots(dotCount) {
+            // Clear existing dots
+            container.innerHTML = '';
+            
+            // Generate parameters
+            const positions = generateRandomPositions(dotCount);
+            const delays = generateDelays(dotCount);
+            const colors = generateColors(dotCount);
+            
+            // Create dots
+            for (let i = 0; i < dotCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'float-element';
+                dot.style.top = `${positions[i].top}%`;
+                dot.style.left = `${positions[i].left}%`;
+                dot.style.animationDelay = `${delays[i]}s`;
+                dot.style.setProperty('--accent-color', colors[i]);
+                container.appendChild(dot);
+            }
+        }
+        
+        // Preview animation - hide editor and show full screen animation
+        function previewAnimation() {
+            // Hide editor panel
+            document.querySelector('.editor-panel').classList.add('editor-hidden');
+        }
+        
+        // Reset to default settings
+        function resetSettings() {
+            dotCountSlider.value = defaultDotCount;
+            dotCountValue.textContent = defaultDotCount;
+            createFloatingDots(defaultDotCount);
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize slider display
+            initSliderDisplay();
+            
+            // Set initial value display
+            dotCountValue.textContent = defaultDotCount;
+            
+            // Create initial dots
+            createFloatingDots(defaultDotCount);
+            
+            // Set up event listeners
+            document.getElementById('preview-button').addEventListener('click', previewAnimation);
+            document.getElementById('reset-button').addEventListener('click', resetSettings);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://oneoverzero.studio/sitemap.xml
+
+# Social media content is publicly accessible

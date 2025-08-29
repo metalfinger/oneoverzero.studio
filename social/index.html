@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Social Media Content Hub - oneoverzero</title>
+		<meta
+			name="description"
+			content="Create custom glitch animations, visual assets, and branded content for social media. oneoverzero studio creative tools for marketing teams."
+		/>
+		<meta name="theme-color" content="#0b0b11" />
+
+		<!-- Fonts -->
+		<link
+			href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,700,900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			:root {
+				--bg: #0b0b11;
+				--fg: #e7e7ec;
+				--muted: #9aa0a6;
+				--accent1: #9f7aea;
+				--accent2: #22d3ee;
+				--accent3: #f472b6;
+				--glass: rgba(255, 255, 255, 0.04);
+				--glow: 0 0 2rem rgba(159, 122, 234, 0.28),
+					0 0 4rem rgba(34, 211, 238, 0.18);
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--fg);
+				font-family: "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto,
+					"Helvetica Neue", Arial, sans-serif;
+				line-height: 1.6;
+				overflow-x: hidden;
+				letter-spacing: 0.02em;
+			}
+
+			.container {
+				width: min(75rem, 92vw);
+				margin-inline: auto;
+				padding: 2rem 0;
+			}
+
+			header {
+				text-align: center;
+				padding: 3rem 0;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+				margin-bottom: 3rem;
+			}
+
+			h1 {
+				font-size: clamp(2rem, 4vw, 3.5rem);
+				font-weight: 700;
+				margin: 0 0 1rem;
+				line-height: 1.2;
+			}
+
+			.subtitle {
+				font-size: clamp(1.1rem, 2vw, 1.3rem);
+				color: var(--muted);
+				max-width: 600px;
+				margin: 0 auto;
+			}
+
+			.content-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-bottom: 3rem;
+			}
+
+			.card {
+				background: linear-gradient(
+					180deg,
+					rgba(255, 255, 255, 0.04),
+					rgba(255, 255, 255, 0.02)
+				);
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				border-radius: 1rem;
+				padding: 1.5rem;
+				transition: all 0.3s ease;
+			}
+
+			.card:hover {
+				transform: translateY(-5px);
+				border-color: rgba(255, 255, 255, 0.2);
+				box-shadow: var(--glow);
+			}
+
+			.card h2 {
+				font-size: 1.4rem;
+				margin: 0 0 1rem;
+				color: var(--fg);
+			}
+
+			.card p {
+				color: var(--muted);
+				margin: 0 0 1.5rem;
+				line-height: 1.6;
+			}
+
+			.card-link {
+				display: inline-block;
+				padding: 0.7rem 1.2rem;
+				background: linear-gradient(90deg, var(--accent1), var(--accent2));
+				color: white;
+				text-decoration: none;
+				border-radius: 0.5rem;
+				font-weight: 600;
+				transition: all 0.2s ease;
+			}
+
+			.card-link:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 5px 15px rgba(159, 122, 234, 0.4);
+			}
+
+			.instructions {
+				background: rgba(255, 255, 255, 0.03);
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				border-radius: 1rem;
+				padding: 2rem;
+				margin: 2rem 0;
+			}
+
+			.instructions h2 {
+				margin-top: 0;
+			}
+
+			.instructions ol {
+				padding-left: 1.5rem;
+			}
+
+			.instructions li {
+				margin-bottom: 1rem;
+			}
+
+			footer {
+				text-align: center;
+				padding: 2rem 0;
+				color: var(--muted);
+				font-size: 0.9rem;
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.mono {
+				font-family: "JetBrains Mono", monospace;
+			}
+
+			@media (max-width: 768px) {
+				.content-grid {
+					grid-template-columns: 1fr;
+				}
+
+				header {
+					padding: 2rem 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Social Media Content Hub</h1>
+				<p class="subtitle">
+					Create custom glitch animations and visual assets for your social
+					media campaigns
+				</p>
+			</header>
+
+			<div class="instructions">
+				<h2>How to Use</h2>
+				<ol>
+					<li>Choose any animation template below</li>
+					<li>
+						For the Glitch Text Editor, customize your text directly in the
+						browser
+					</li>
+					<li>Click "Preview Animation" to see your custom content</li>
+					<li>Screen record the animation for your social media posts</li>
+					<li>Repeat with different text or templates as needed</li>
+				</ol>
+			</div>
+
+			<div class="content-grid">
+				<div class="card">
+					<h2>Hero Background</h2>
+					<p>
+						Particle animation background from the hero section. Perfect for
+						short looping backgrounds.
+					</p>
+					<a
+						target="_blank"
+						href="/social/video_exports/hero_export.html"
+						class="card-link"
+						>View Animation</a
+					>
+				</div>
+
+				<div class="card">
+					<h2>Button Gradient</h2>
+					<p>
+						Animated gradient background used in buttons. Great for transition
+						effects.
+					</p>
+					<a
+						target="_blank"
+						href="/social/video_exports/button_export.html"
+						class="card-link"
+						>View Animation</a
+					>
+				</div>
+
+				<div class="card">
+					<h2>Philosophy Shader</h2>
+					<p>
+						Fragment shader from the philosophy section. Creates dynamic color
+						transitions.
+					</p>
+					<a
+						target="_blank"
+						href="/social/video_exports/philosophy_export.html"
+						class="card-link"
+						>View Animation</a
+					>
+				</div>
+
+				<div class="card">
+					<h2>Floating Dots</h2>
+					<p>
+						Floating dots animation from the WHO section. Subtle background
+						motion.
+					</p>
+					<a
+						target="_blank"
+						href="/social/video_exports/floating_dots_export.html"
+						class="card-link"
+						>View Animation</a
+					>
+				</div>
+
+				<div class="card">
+					<h2>Floating Dots Editor</h2>
+					<p>
+						Interactive floating dots animation. Customize parameters and create
+						unique variations.
+					</p>
+					<a
+						target="_blank"
+						href="/social/video_exports/floating_dots_editor.html"
+						class="card-link"
+						>Customize Dots</a
+					>
+				</div>
+
+				<div class="card">
+					<h2>Glitch Text Editor</h2>
+					<p>
+						Interactive glitch text animation. Customize the text and create
+						unique social content.
+					</p>
+					<a
+						target="_blank"
+						href="/social/video_exports/glitch_editor.html"
+						class="card-link"
+						>Customize Text</a
+					>
+				</div>
+			</div>
+
+			<footer>
+				<p>oneoverzero studio &copy; 2025 | Social Media Content Hub</p>
+			</footer>
+		</div>
+	</body>
+</html>
