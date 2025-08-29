@@ -77,18 +77,26 @@ function initPhilosophyCanvas() {
             // Set mouse to center
             let mousePos = { x: 0.5, y: 0.5 };
 
-            // Set canvas size
-            philosophyCanvas.width = 1920;
-            philosophyCanvas.height = 1920;
-            gl.viewport(0, 0, 1920, 1920);
+            // Handle canvas resizing
+            function resizeCanvas() {
+                philosophyCanvas.width = philosophyCanvas.clientWidth;
+                philosophyCanvas.height = philosophyCanvas.clientHeight;
+                gl.viewport(0, 0, philosophyCanvas.width, philosophyCanvas.height);
+            }
 
             const renderPhilosophy = (time) => {
                 time *= 0.001;
                 
+                // Update canvas size if needed
+                if (philosophyCanvas.width !== philosophyCanvas.clientWidth || 
+                    philosophyCanvas.height !== philosophyCanvas.clientHeight) {
+                    resizeCanvas();
+                }
+                
                 gl.uniform2f(
                     resolutionUniformLocation,
-                    1920,
-                    1920
+                    philosophyCanvas.width,
+                    philosophyCanvas.height
                 );
                 gl.uniform1f(timeUniformLocation, time);
                 gl.uniform2f(mouseUniformLocation, mousePos.x, 1.0 - mousePos.y);
@@ -96,7 +104,12 @@ function initPhilosophyCanvas() {
                 philosophyRAF = requestAnimationFrame(renderPhilosophy);
             };
 
+            // Initial resize
+            resizeCanvas();
             philosophyRAF = requestAnimationFrame(renderPhilosophy);
+            
+            // Handle window resize
+            window.addEventListener("resize", resizeCanvas);
             
         } catch (error) {
             console.error("WebGL shader for philosophy section failed:", error);

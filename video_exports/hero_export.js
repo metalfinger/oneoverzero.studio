@@ -3,15 +3,18 @@ function initAetherCanvas() {
     const heroCanvas = document.getElementById("aether");
     if (heroCanvas) {
         const heroCtx = heroCanvas.getContext("2d");
-        let w = 1920, h = 1920, dpr = 1;
+        let w, h, dpr = 1;
         const particles = [];
         const MAX = 1200;
         let t = 0;
         let raf;
 
-        // Set canvas size
-        heroCanvas.width = w;
-        heroCanvas.height = h;
+        function resizeHeroCanvas() {
+            w = heroCanvas.width = Math.floor(innerWidth * dpr);
+            h = heroCanvas.height = Math.floor(innerHeight * dpr);
+            heroCanvas.style.width = innerWidth + "px";
+            heroCanvas.style.height = innerHeight + "px";
+        }
 
         function rand(a, b) {
             return a + Math.random() * (b - a);
@@ -85,8 +88,15 @@ function initAetherCanvas() {
             loop();
         }
 
+        // Initialize and handle resizing
+        resizeHeroCanvas();
         initHeroCanvas();
         startAether();
+        
+        window.addEventListener("resize", () => {
+            resizeHeroCanvas();
+            initHeroCanvas();
+        });
     }
 }
 

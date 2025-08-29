@@ -1,6 +1,6 @@
 # Video Export Instructions
 
-This directory contains standalone HTML/JS files for each component you want to export as video:
+This directory contains standalone HTML/JS files for each component you want to export as video. All exports now automatically fit the browser window size for flexible recording at any resolution:
 
 1. **Hero Background** (`hero_export.html`/`hero_export.js`) - The particle animation from the hero section
 2. **Button Gradient** (`button_export.html`) - The animated gradient background used in buttons
@@ -13,28 +13,29 @@ To record these as videos, you can use a screen recording tool or browser extens
 ### Option 1: Browser Extension (Recommended)
 1. Install a screen recording extension like "Screencastify" or "Loom"
 2. Open each HTML file in your browser
-3. Start recording and let it run for 10-15 seconds to capture the looping animation
-4. Save the video
+3. Resize your browser window to your desired recording resolution
+4. Start recording and let it run for 10-15 seconds to capture the looping animation
+5. Save the video
 
 ### Option 2: OBS Studio (Free Software)
 1. Download and install OBS Studio
 2. Add a "Browser" source
 3. Point it to the HTML file (e.g., `file:///C:/Users/Admin/Documents/code/oneoverzero.studio/video_exports/hero_export.html`)
-4. Set the resolution to 1920x1920
+4. Set the browser source resolution to your desired recording size
 5. Start recording
 
 ### Option 3: Command Line with FFmpeg
 If you have FFmpeg installed, you can record directly:
 
 ```bash
-# For the hero background
-ffmpeg -f gdigrab -framerate 60 -video_size 1920x1920 -i http://localhost:8000/video_exports/hero_export.html -t 15 -c:v libx264 -pix_fmt yuv420p hero_background.mp4
+# For the hero background (record at 1920x1080)
+ffmpeg -f gdigrab -framerate 60 -video_size 1920x1080 -i http://localhost:8000/video_exports/hero_export.html -t 15 -c:v libx264 -pix_fmt yuv420p hero_background.mp4
 
-# For the button gradient
-ffmpeg -f gdigrab -framerate 60 -video_size 1920x1920 -i http://localhost:8000/video_exports/button_export.html -t 15 -c:v libx264 -pix_fmt yuv420p button_gradient.mp4
+# For the button gradient (record at 1920x1080)
+ffmpeg -f gdigrab -framerate 60 -video_size 1920x1080 -i http://localhost:8000/video_exports/button_export.html -t 15 -c:v libx264 -pix_fmt yuv420p button_gradient.mp4
 
-# For the philosophy shader
-ffmpeg -f gdigrab -framerate 60 -video_size 1920x1920 -i http://localhost:8000/video_exports/philosophy_export.html -t 15 -c:v libx264 -pix_fmt yuv420p philosophy_shader.mp4
+# For the philosophy shader (record at 1920x1080)
+ffmpeg -f gdigrab -framerate 60 -video_size 1920x1080 -i http://localhost:8000/video_exports/philosophy_export.html -t 15 -c:v libx264 -pix_fmt yuv420p philosophy_shader.mp4
 ```
 
 ## Serving Files Locally
